@@ -10,8 +10,9 @@
 	let prominent = false;
 	let dense = false;
 	let secondaryColor = false;
-	let open = true;
+	let open = false;
 	$: path = $page.url.pathname;
+	let authenticated = false;
 </script>
 
 <div class="flexy">
@@ -32,7 +33,17 @@
 					<IconButton class="material-icons" aria-label="Print this page">print</IconButton>
 					<IconButton class="material-icons" aria-label="Bookmark this page">bookmark</IconButton> -->
 					<!-- <button class="logoutBtn">Log out</button> -->
-					<i class="iconLogout fa-solid fa-arrow-right-from-bracket" />
+					{#if !authenticated}
+						<i
+							on:click={() => (authenticated = !authenticated)}
+							class="iconLogout fa-solid fa-arrow-right-from-bracket"
+						/>
+					{:else}
+						<i
+							on:click={() => (authenticated = !authenticated)}
+							class="iconLogout fa-solid fa-arrow-right-to-bracket"
+						/>
+					{/if}
 				</Section>
 			</Row>
 		</TopAppBar>
